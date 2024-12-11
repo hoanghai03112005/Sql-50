@@ -1,0 +1,6 @@
+SELECT Employee.name
+FROM Employee
+LEFT JOIN Employee AS Manager
+  ON Employee.id = Manager.managerId
+GROUP BY Employee.id, Employee.name
+HAVING COUNT(Employee.id) >= 5;
