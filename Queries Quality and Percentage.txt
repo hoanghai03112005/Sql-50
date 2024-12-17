@@ -1,0 +1,10 @@
+SELECT Query.query_name,
+ROUND( SUM(Query.rating / Query.position) / COUNT(Query.query_name), 2 ) AS quality,
+ROUND( AVG(Query.rating < 3) * 100, 2 ) AS poor_query_percentage 
+FROM Queries AS Query
+LEFT JOIN Queries AS Query2
+ON(
+    Query.query_name = Query2.query_name 
+)
+WHERE Query.query_name IS NOT NULL
+GROUP BY 1
